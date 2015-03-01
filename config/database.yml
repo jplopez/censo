@@ -85,6 +85,6 @@ test:
 #
 production:
   <<: *default
-  database: censo-api_production
-  username: censo-api
-  password: <%= ENV['CENSO-API_DATABASE_PASSWORD'] %>
+  database: d7cjcf02tist3
+  username: iwmlnkfpgawtov
+  password: VH1Eusaa72jPSjAPXtgWjTIAhK
