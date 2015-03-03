@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301053305) do
+ActiveRecord::Schema.define(version: 20150302182038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,5 +21,7 @@ ActiveRecord::Schema.define(version: 20150301053305) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  add_index "units", ["key"], name: "index_units_on_key", unique: true, using: :btree
 
 end

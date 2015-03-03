@@ -8,17 +8,17 @@ class ApiUnitsController < ApplicationController
 
   before_filter only: :create do |c|
     meth = c.method(:validate_json)
-    meth.call (@json.has_key?('project') && @json['project'].responds_to?(:[]) && @json['project']['name'])
+    meth.call (@json.has_key?('unit') && @json['unit'].responds_to?(:[]) && @json['unit']['key'])
   end
 
   before_filter only: :update do |c|
     meth = c.method(:validate_json)
-    meth.call (@json.has_key?('project'))
+    meth.call (@json.has_key?('unit'))
   end
 
   before_filter only: :create do |c|
     meth = c.method(:check_existence)
-    meth.call(@project, "Project", "find_by_name(@json['project']['name'])")
+    meth.call(@unit, "Unit", "find_by_key(@json['unit']['key'])")
   end
 
   def index
@@ -30,18 +30,18 @@ class ApiUnitsController < ApplicationController
   end
 
   def create
-    if @project.present?
+    if @unit.present?
       render nothing: true, status: :conflict
     else
-      @project = Project.new
-      update_values :@project, @json['project']
+      @unit = Unit.new
+      update_values :@unit, @json['unit']
     end
   end
 
   def update
-    @project.assign_attributes(@json['unit'])
-    if @project.save
-      render json: @project
+    @unit.assign_attributes(@json['unit'])
+    if @unit.save
+      render json: @unit
     else
       render nothing: true, status: :bad_request
     end
